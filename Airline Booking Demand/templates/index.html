@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Airline Booking Market Demand Data</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">✈️ Airline Booking Market Demand Data</div>
+  </header>
+  <main class="main-content">
+    <section class="booking-section">
+      <h1>Find Flights</h1>
+      {% if message %}
+        <div class="message">{{ message }}</div>
+      {% endif %}
+      <form method="POST" class="booking-form">
+        <div class="form-group">
+          <label for="origin">Origin (IATA):</label>
+          <input name="origin" id="origin" maxlength="3" required placeholder="e.g. JFK">
+        </div>
+        <div class="form-group">
+          <label for="destination">Destination (IATA, optional):</label>
+          <input name="destination" id="destination" maxlength="3" placeholder="e.g. LAX">
+        </div>
+        <div class="form-group">
+          <label for="date">Date (optional):</label>
+          <input name="date" id="date" placeholder="YYYY-MM-DD">
+        </div>
+        <button type="submit" class="btn-primary">Search Flights</button>
+      </form>
+    </section>
+    {% if flights %}
+      <section class="results-section">
+        <h2>Flights from {{ request.form.origin|upper }}{% if request.form.destination %} to {{ request.form.destination|upper }}{% endif %}</h2>
+        <div class="table-container" style="max-width:100%;">
+          <table class="flights-table" style="width:100%; table-layout:fixed;">
+            <thead style="display:table; width:100%; table-layout:fixed;">
+              <tr>
+                <th>Date</th><th>From</th><th>To</th><th>Airline</th><th>Flight #</th><th>Status</th>
+              </tr>
+            </thead>
+            <tbody style="display:block; max-height:340px; overflow-y:auto; width:100%; table-layout:fixed;">
+              {% for f in flights %}
+                <tr style="display:table; width:100%; table-layout:fixed;">
+                  <td>{{ f.flight_date }}</td>
+                  <td>{{ f.departure.iata }}</td>
+                  <td>{{ f.arrival.iata }}</td>
+                  <td>{{ f.airline.name }}</td>
+                  <td>{{ f.flight.number }}</td>
+                  <td>{{ f.flight_status }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    {% endif %}
+    <section class="options-section" style="margin-top:2rem; text-align:center;">
+      <h3 style="margin-bottom:1rem; color:#003366;">Explore More Insights</h3>
+      <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1.2rem;">
+        <a href="/chart" class="btn-primary" style="min-width:160px;">Popular Routes</a>
+        <a href="/demand" class="btn-primary" style="min-width:160px;">Demand Trends</a>
+        <a href="/airlines" class="btn-primary" style="min-width:160px;">Airlines</a>
+        <a href="/price-trends" class="btn-primary" style="min-width:160px;">Price Trends</a>
+        <a href="/insights" class="btn-primary" style="min-width:160px;">AI Insights</a>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <p>&copy; {{ 2024 }} Airline Booking Market Demand Data. All rights reserved.</p>
+  </footer>
+</body>
+</html>

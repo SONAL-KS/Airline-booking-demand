@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Price Trends</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">✈️ Airline Booking Market Demand Data</div>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/chart">Routes</a>
+      <a href="/demand">Demand</a>
+      <a href="/airlines">Airlines</a>
+      <a href="/price-trends" class="active">Price Trends</a>
+      <a href="/insights">Insights</a>
+    </nav>
+  </header>
+  <main class="main-content">
+    <section class="results-section">
+      <h1>Average Flight Price Over Time</h1>
+      <div class="table-container">
+        {{ chart|safe }}
+      </div>
+      <a href="/" class="btn-primary" style="margin-top:1.5rem;display:inline-block;">← Back</a>
+    </section>
+  </main>
+  <footer class="footer">
+    <p>&copy; {{ 2024 }} Airline Booking Market Demand Data. All rights reserved.</p>
+  </footer>
+</body>
+</html> 
