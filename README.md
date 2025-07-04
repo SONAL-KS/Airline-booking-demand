@@ -40,6 +40,3 @@ Developed a full-stack web application to analyze airline booking market demand 
   - Real-time pricing APIs
   - Advanced forecasting modules
   - Enhanced filtering and route prediction features
-
-
-[Uploading airline_market_analysis.md…]()
