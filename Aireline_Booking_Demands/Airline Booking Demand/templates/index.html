@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Airline Booking Market Demand Data</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">✈️ Airline Booking Market Demand Data</div>
+    <div class="header-decoration">
+      <span class="plane-icon">🛩️</span>
+      <span class="plane-icon">✈️</span>
+      <span class="plane-icon">🛫</span>
+    </div>
+  </header>
+  <main class="main-content">
+    <section class="booking-section">
+      <h1>🚀 Find Your Perfect Flight</h1>
+      <p class="subtitle">Discover flight data and market insights across Australia</p>
+      {% if message %}
+        <div class="message">{{ message }}</div>
+      {% endif %}
+      <form method="POST" class="booking-form">
+        <div class="form-group">
+          <label for="origin">Origin Airport:</label>
+          <select name="origin" id="origin" required>
+            <option value="">Select Origin Airport</option>
+            {% for airport in airports %}
+              <option value="{{ airport.code }}">{{ airport.code }} - {{ airport.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="destination">Destination Airport (optional):</label>
+          <select name="destination" id="destination">
+            <option value="">Select Destination Airport (optional)</option>
+            {% for airport in airports %}
+              <option value="{{ airport.code }}">{{ airport.code }} - {{ airport.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="date">Date (optional):</label>
+          <input name="date" id="date" type="date" placeholder="YYYY-MM-DD">
+        </div>
+        <button type="submit" class="btn-primary">Search Flights</button>
+      </form>
+    </section>
+    {% if flights %}
+      <section class="results-section">
+        <h2>Flights from {{ request.form.origin|upper }}{% if request.form.destination %} to {{ request.form.destination|upper }}{% endif %}</h2>
+        <div class="table-container" style="max-width:100%;">
+          <table class="flights-table" style="width:100%; table-layout:fixed;">
+            <thead style="display:table; width:100%; table-layout:fixed;">
+              <tr>
+                <th>Date</th><th>From</th><th>To</th><th>Airline</th><th>Flight #</th><th>Status</th>
+              </tr>
+            </thead>
+            <tbody style="display:block; max-height:340px; overflow-y:auto; width:100%; table-layout:fixed;">
+              {% for f in flights %}
+                <tr style="display:table; width:100%; table-layout:fixed;">
+                  <td>{{ f.flight_date }}</td>
+                  <td>{{ f.departure.iata }}</td>
+                  <td>{{ f.arrival.iata }}</td>
+                  <td>{{ f.airline.name }}</td>
+                  <td>{{ f.flight.number }}</td>
+                  <td>{{ f.flight_status }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    {% endif %}
+    <section class="options-section">
+      <h3 class="section-title">📊 Explore More Insights</h3>
+      <div class="insights-grid">
+        <a href="/chart" class="insight-card">
+          <div class="card-icon">📈</div>
+          <h4>Popular Routes</h4>
+          <p>Discover the most frequent domestic routes</p>
+        </a>
+        <a href="/demand" class="insight-card">
+          <div class="card-icon">📅</div>
+          <h4>Demand Trends</h4>
+          <p>Analyze flight demand over time</p>
+        </a>
+        <a href="/airlines" class="insight-card">
+          <div class="card-icon">✈️</div>
+          <h4>Airlines</h4>
+          <p>Compare airline frequencies</p>
+        </a>
+        <a href="/price-trends" class="insight-card">
+          <div class="card-icon">💰</div>
+          <h4>Price Trends</h4>
+          <p>Track average flight prices</p>
+        </a>
+        <a href="/insights" class="insight-card">
+          <div class="card-icon">🤖</div>
+          <h4>AI Insights</h4>
+          <p>Get intelligent market analysis</p>
+        </a>
+        <a href="/price-range" class="insight-card">
+          <div class="card-icon">💰</div>
+          <h4>Price Range</h4>
+          <p>View ticket price statistics in AUD</p>
+        </a>
+        <a href="/routes" class="insight-card">
+          <div class="card-icon">🛫</div>
+          <h4>All Routes</h4>
+          <p>Explore all Australian domestic routes</p>
+        </a>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <p>&copy; 2025 Airline Booking Market Demand Data. All rights reserved.</p>
+  </footer>
+</body>
+</html>

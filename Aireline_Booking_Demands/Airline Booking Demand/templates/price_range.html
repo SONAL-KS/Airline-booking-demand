@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Price Range Analysis - Airline Booking Market Demand Data</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">✈️ Airline Booking Market Demand Data</div>
+    <div class="header-decoration">
+      <span class="plane-icon">🛩️</span>
+      <span class="plane-icon">✈️</span>
+      <span class="plane-icon">🛫</span>
+    </div>
+  </header>
+  
+  <main class="main-content">
+    <section class="page-header">
+      <h1>💰 Australian Domestic Flight Price Analysis</h1>
+      <p class="subtitle">Comprehensive price statistics for domestic flights in Australian Dollars (AUD)</p>
+    </section>
+
+    {% if message %}
+      <div class="message">{{ message }}</div>
+    {% endif %}
+
+    {% if stats %}
+      <section class="stats-section">
+        <h2>📊 Price Statistics Overview</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">💵</div>
+            <h3>Lowest Price</h3>
+            <p class="stat-value">${{ stats.min_price }}</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">💎</div>
+            <h3>Highest Price</h3>
+            <p class="stat-value">${{ stats.max_price }}</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">📈</div>
+            <h3>Average Price</h3>
+            <p class="stat-value">${{ stats.avg_price }}</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">⚖️</div>
+            <h3>Median Price</h3>
+            <p class="stat-value">${{ stats.median_price }}</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">✈️</div>
+            <h3>Total Flights</h3>
+            <p class="stat-value">{{ stats.total_flights }}</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🛫</div>
+            <h3>Domestic Routes</h3>
+            <p class="stat-value">{{ stats.total_routes }}</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chart-section">
+        <h2>📊 Price Range Distribution</h2>
+        <div class="chart-container">
+          {{ chart | safe }}
+        </div>
+      </section>
+
+      <section class="price-breakdown">
+        <h2>🔍 Detailed Price Breakdown</h2>
+        <div class="price-categories">
+          {% for category, count in stats.price_ranges.items() %}
+            <div class="price-category">
+              <div class="category-header">
+                <h4>{{ category }}</h4>
+                <span class="count">{{ count }} flights</span>
+              </div>
+              <div class="percentage-bar">
+                <div class="percentage-fill" style="width: {{ (count / stats.total_flights * 100) | round(1) }}%;"></div>
+              </div>
+              <p class="percentage-text">{{ (count / stats.total_flights * 100) | round(1) }}% of total flights</p>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+
+    <section class="navigation-section">
+      <h3>🔗 Explore More Insights</h3>
+      <div class="nav-buttons">
+        <a href="/" class="btn-secondary">🏠 Back to Home</a>
+        <a href="/price-trends" class="btn-secondary">📈 Price Trends</a>
+        <a href="/chart" class="btn-secondary">🛫 Popular Routes</a>
+        <a href="/insights" class="btn-secondary">🤖 AI Insights</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 Airline Booking Market Demand Data. All rights reserved.</p>
+  </footer>
+</body>
+</html> 

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Australian Domestic Air Routes - Airline Booking Market Demand Data</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">✈️ Airline Booking Market Demand Data</div>
+    <div class="header-decoration">
+      <span class="plane-icon">🛩️</span>
+      <span class="plane-icon">✈️</span>
+      <span class="plane-icon">🛫</span>
+    </div>
+  </header>
+  
+  <main class="main-content">
+    <section class="page-header">
+      <h1>🛫 Australian Domestic Air Routes</h1>
+      <p class="subtitle">Comprehensive guide to all major domestic flight routes across Australia</p>
+    </section>
+
+    <section class="stats-section">
+      <h2>📊 Route Statistics Overview</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">🛫</div>
+          <h3>Total Routes</h3>
+          <p class="stat-value">{{ stats.total_routes }}</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📏</div>
+          <h3>Total Distance</h3>
+          <p class="stat-value">{{ stats.total_distance }} km</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🚀</div>
+          <h3>Very High Frequency</h3>
+          <p class="stat-value">{{ stats.very_high_freq }}</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">✈️</div>
+          <h3>High Frequency</h3>
+          <p class="stat-value">{{ stats.high_freq }}</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🛬</div>
+          <h3>Medium Frequency</h3>
+          <p class="stat-value">{{ stats.medium_freq }}</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🛩️</div>
+          <h3>Low Frequency</h3>
+          <p class="stat-value">{{ stats.low_freq }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="routes-section">
+      <h2>🚀 Very High Frequency Routes</h2>
+      <p class="section-description">Major routes with multiple daily flights</p>
+      <div class="routes-grid">
+        {% for route in very_high_freq %}
+        <div class="route-card very-high">
+          <div class="route-header">
+            <h3>{{ route.name }}</h3>
+            <span class="frequency-badge very-high">{{ route.frequency }}</span>
+          </div>
+          <div class="route-details">
+            <p><strong>From:</strong> {{ route.origin }}</p>
+            <p><strong>To:</strong> {{ route.destination }}</p>
+            <p><strong>Distance:</strong> {{ route.distance }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="routes-section">
+      <h2>✈️ High Frequency Routes</h2>
+      <p class="section-description">Popular routes with daily flights</p>
+      <div class="routes-grid">
+        {% for route in high_freq %}
+        <div class="route-card high">
+          <div class="route-header">
+            <h3>{{ route.name }}</h3>
+            <span class="frequency-badge high">{{ route.frequency }}</span>
+          </div>
+          <div class="route-details">
+            <p><strong>From:</strong> {{ route.origin }}</p>
+            <p><strong>To:</strong> {{ route.destination }}</p>
+            <p><strong>Distance:</strong> {{ route.distance }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="routes-section">
+      <h2>🛬 Medium Frequency Routes</h2>
+      <p class="section-description">Regular routes with several flights per week</p>
+      <div class="routes-grid">
+        {% for route in medium_freq %}
+        <div class="route-card medium">
+          <div class="route-header">
+            <h3>{{ route.name }}</h3>
+            <span class="frequency-badge medium">{{ route.frequency }}</span>
+          </div>
+          <div class="route-details">
+            <p><strong>From:</strong> {{ route.origin }}</p>
+            <p><strong>To:</strong> {{ route.destination }}</p>
+            <p><strong>Distance:</strong> {{ route.distance }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="routes-section">
+      <h2>🛩️ Low Frequency Routes</h2>
+      <p class="section-description">Regional and seasonal routes</p>
+      <div class="routes-grid">
+        {% for route in low_freq %}
+        <div class="route-card low">
+          <div class="route-header">
+            <h3>{{ route.name }}</h3>
+            <span class="frequency-badge low">{{ route.frequency }}</span>
+          </div>
+          <div class="route-details">
+            <p><strong>From:</strong> {{ route.origin }}</p>
+            <p><strong>To:</strong> {{ route.destination }}</p>
+            <p><strong>Distance:</strong> {{ route.distance }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="navigation-section">
+      <h3>🔗 Explore More Insights</h3>
+      <div class="nav-buttons">
+        <a href="/" class="btn-secondary">🏠 Back to Home</a>
+        <a href="/chart" class="btn-secondary">📊 Popular Routes</a>
+        <a href="/price-range" class="btn-secondary">💰 Price Range</a>
+        <a href="/insights" class="btn-secondary">🤖 AI Insights</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 Airline Booking Market Demand Data. All rights reserved.</p>
+  </footer>
+</body>
+</html> 
